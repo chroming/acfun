@@ -1,17 +1,17 @@
-# -*- coding:gbk -*-
+# -*- coding:utf-8 -*-
 import urllib
 import urllib2
 import cookielib
 import os
 import sys
 
-#¶¨Òå»ñÈ¡cookieº¯Êı
+#å®šä¹‰è·å–cookieå‡½æ•°
 def get_cookie():
     cookiefile = 'coofile'
     cookie = cookielib.MozillaCookieJar(cookiefile)
     opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cookie))
-    userna = raw_input("ÇëÊäÈëacfunÕËºÅ£º")
-    passwd = raw_input("ÇëÊäÈëacfunÃÜÂë£º")
+    userna = raw_input("è¯·è¾“å…¥acfunè´¦å·ï¼š")
+    passwd = raw_input("è¯·è¾“å…¥acfunå¯†ç ï¼š")
     postdata = urllib.urlencode({
         'username':userna,
         'password':passwd
@@ -25,17 +25,17 @@ def get_cookie():
 
     result = opener.open(req)
    # print result.read()
-   # maxcheck = ("ÄúÒÑ´ïµ½×î´ó³¢ÊÔ´ÎÊı,ÇëÉÔºòÔÙµÇÂ¼.")
+   # maxcheck = ("æ‚¨å·²è¾¾åˆ°æœ€å¤§å°è¯•æ¬¡æ•°,è¯·ç¨å€™å†ç™»å½•.")
     #print (maxcheck.decode('utf-8'))
     #print (result.read()["result"])
     #if maxcheck in result.read()["result"]
        # sys.exit()
 
-#±£´æcookieµ½±¾µØ
+#ä¿å­˜cookieåˆ°æœ¬åœ°
     cookie.save(ignore_discard=True,ignore_expires=True)
     return cookie
 
-#²âÊÔ±¾µØcookieÊÇ·ñÕı³£º¯Êı
+#æµ‹è¯•æœ¬åœ°cookieæ˜¯å¦æ­£å¸¸å‡½æ•°
 def test_cook():
     try:
         cookie = cookielib.MozillaCookieJar()
@@ -47,7 +47,7 @@ def test_cook():
 
     return cookie
 
-#Ç©µ½Ö÷³ÌĞò
+#ç­¾åˆ°ä¸»ç¨‹åº
 def checkacfun():
     cookie =  test_cook()
     opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cookie))
@@ -55,10 +55,10 @@ def checkacfun():
     rd = checkin.read()
     print rd
 
-#Èç¹ûÇ©µ½Ò³·µ»Ø401Î´µÇÂ¼×´Ì¬·µ»ØÖØĞÂ»ñÈ¡cookie
+#å¦‚æœç­¾åˆ°é¡µè¿”å›401æœªç™»å½•çŠ¶æ€è¿”å›é‡æ–°è·å–cookie
     if str(401) in rd:
         os.remove('coofile')
-        print("ÕËºÅ»òÃÜÂë´íÎóÇëÖØĞÂÊäÈë£¡")
+        print("è´¦å·æˆ–å¯†ç é”™è¯¯è¯·é‡æ–°è¾“å…¥ï¼")
         cookie = get_cookie()
         checkacfun()
     return
