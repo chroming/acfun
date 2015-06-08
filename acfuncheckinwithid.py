@@ -2,39 +2,49 @@
 import urllib
 import urllib2
 import cookielib
+import time
 
-#初始化一个CookieJar来处理Cookie的信息#  
-cookie = cookielib.CookieJar()
+num = 3
 
-#创建一个新的opener来使用我们的CookieJar#  
-opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cookie))
+while num > 0:
 
-postdata = urllib.urlencode({
-    'username':'',
-    'password':''
-})
-#headers = {
-     #'referer':'http://www.acfun.tv/login/'
-#}
-req = urllib2.Request(
-    url = 'http://www.acfun.tv/login.aspx',
-    data = postdata,
-    #headers = headers
-)
-result = opener.open(req)
-print result.read()
+    #初始化一个CookieJar来处理Cookie的信息#
+    cookie = cookielib.CookieJar()
 
-#print cookie
+    #创建一个新的opener来使用我们的CookieJar#
+    opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cookie))
 
-#个人主页
-myspace = opener.open('http://www.acfun.tv/member/#area=splash')
+    postdata = urllib.urlencode({
+        'username':'',
+        'password':''
+    })
+    #headers = {
+         #'referer':'http://www.acfun.tv/login/'
+    #}
+    req = urllib2.Request(
+        url = 'http://www.acfun.tv/login.aspx',
+        data = postdata,
+        #headers = headers
+    )
+    result = opener.open(req)
+    print result.read()
 
-#print result.read()
+    #print cookie
 
-#签到地址
-checkin = opener.open('http://www.acfun.tv/member/checkin.aspx')
+    #个人主页
+    myspace = opener.open('http://www.acfun.tv/member/#area=splash')
 
-print checkin.read()
+    #print result.read()
+
+    #签到地址
+    checkin = opener.open('http://www.acfun.tv/member/checkin.aspx')
+
+    print checkin.read()
+
+    time.sleep(5)
+
+    num = num - 1
+
 
 
 
